@@ -1,0 +1,28 @@
+.header {
+  width: 90vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  text-align: left;
+}
+.title p {
+  display: inline;
+}
+.header button {
+  width: 120px;
+  height: 48px;
+  padding: 8px;
+  margin: 4px;
+  border: 1px solid black;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.content {
+  height: 80vh;
+}
