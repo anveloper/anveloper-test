@@ -3,6 +3,8 @@ import { useAppSelector } from "../../app/hooks";
 import { selectSocket, selectName } from "./gameSlice";
 import { useNavigate } from "react-router-dom";
 import styles from "./Game.module.css";
+import Canvas from "./canvas/Canvas";
+import Chat from "./chat/Chat";
 
 const Game = () => {
   const socket = useAppSelector(selectSocket);
@@ -31,8 +33,8 @@ const Game = () => {
         <button onClick={handleLeave}>나가기</button>
       </div>
       <div className={styles.content}>
-        <div className={"canvas"}></div>
-        <div className={"chat"}></div>
+        <Canvas/>
+        <Chat/>
       </div>
     </div>
   );

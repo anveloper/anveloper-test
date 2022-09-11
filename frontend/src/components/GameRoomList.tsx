@@ -67,6 +67,7 @@ const GameRoomList = () => {
       joinRoomName,
       (roomName: string, count: number) => {
         navigate(`/game/${roomName}`);
+        dispatch(setRoomName(roomName));
       }
     );
   };

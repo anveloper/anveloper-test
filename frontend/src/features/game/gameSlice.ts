@@ -9,6 +9,8 @@ export interface GameState {
   userName: string;
   roomName: string;
   roomCount: number;
+  answer: string;
+  color: string;
   status: "idle" | "loading" | "failed";
 }
 
@@ -18,6 +20,8 @@ const initialState: GameState = {
   userName: "",
   roomName: "",
   roomCount: 0,
+  answer: "",
+  color: "black",
   status: "idle",
 };
 
@@ -43,6 +47,12 @@ export const gameSlice = createSlice({
     setUserName: (state, { payload }) => {
       state.userName = payload;
     },
+    setAnswer: (state, { payload }) => {
+      state.answer = payload;
+    },
+    setColor: (state, { payload }) => {
+      state.color = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -59,11 +69,15 @@ export const gameSlice = createSlice({
   },
 });
 
-export const { setRoomList, setRoomName, setUserName } = gameSlice.actions;
+export const { setRoomList, setRoomName, setUserName, setAnswer, setColor } =
+  gameSlice.actions;
 export const selectSocket = (state: RootState) => state.game.socket;
 export const selectRoomList = (state: RootState) => state.game.roomList;
 export const selectName = (state: RootState) => {
   return { userName: state.game.userName, roomName: state.game.roomName };
 };
+export const selectRoomName = (state: RootState) => state.game.roomName;
+export const selectAnswer = (state: RootState) => state.game.answer;
+export const selectColor = (state: RootState) => state.game.color;
 
 export default gameSlice.reducer;
