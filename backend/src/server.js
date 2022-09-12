@@ -81,8 +81,4 @@ io.on("connection", (socket) => {
   socket.on("nickname", (nickname) => (socket["nickname"] = nickname));
 });
 
-const handleListen = (err) =>
-  err
-    ? console.log(err)
-    : console.log(`Listening on.. http://localhost:${PORT}`);
-server.listen(PORT, handleListen);
+module.exports = server;
