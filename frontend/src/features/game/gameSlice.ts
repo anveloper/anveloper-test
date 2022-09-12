@@ -3,8 +3,7 @@ import { RootState } from "../../app/store";
 import { io, Socket } from "socket.io-client";
 import Axios from "axios";
 
-const socketURL = "http://anveloper.kr";
-const socketPORT = 5000;
+const baseURL = "http://anveloper.kr";
 export interface GameState {
   roomList: [];
   socket: Socket;
@@ -18,7 +17,7 @@ export interface GameState {
 
 const initialState: GameState = {
   roomList: [],
-  socket: io(`${socketURL}:${socketPORT}`),
+  socket: io(baseURL),
   userName: "",
   roomName: "",
   roomCount: 0,
