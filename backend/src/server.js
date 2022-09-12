@@ -8,7 +8,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "http://anveloper.kr:3000"],
     credentials: true,
   })
 );
@@ -20,7 +20,7 @@ app.get("/api/roomList", (req, res) => {
 const server = http.createServer(app);
 const io = SocketIO(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "http://anveloper.kr:3000"],
   },
 });
 
