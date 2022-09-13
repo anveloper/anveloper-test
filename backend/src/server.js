@@ -8,19 +8,15 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://anveloper.kr:3000"],
+    origin: ["http://localhost:3000"],
     credentials: true,
   })
 );
 
-app.get("/api/roomList", (req, res) => {
-  res.send(publicRooms());
-});
-
 const server = http.createServer(app);
 const io = SocketIO(server, {
   cors: {
-    origin: ["http://localhost:3000", "http://anveloper.kr:3000"],
+    origin: ["http://localhost:3000"],
   },
 });
 
@@ -81,4 +77,8 @@ io.on("connection", (socket) => {
   socket.on("nickname", (nickname) => (socket["nickname"] = nickname));
 });
 
-module.exports = server;
+const handleListen = (err) =>
+  err
+    ? console.log(err)
+    : console.log(`Listening on.. http://localhost:${PORT}`);
+server.listen(PORT, handleListen);

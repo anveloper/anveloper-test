@@ -1,7 +1,7 @@
 {
-  "name": "backend",
+  "name": "socket",
   "version": "1.0.0",
-  "description": "Chat & Draw",
+  "description": "Socket.io Server",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon"

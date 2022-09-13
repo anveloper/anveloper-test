@@ -3,7 +3,7 @@ import { RootState } from "../../app/store";
 import { io, Socket } from "socket.io-client";
 import Axios from "axios";
 
-const baseURL = "http://anveloper.kr";
+const baseURL = "http://localhost:5000";
 export interface GameState {
   roomList: [];
   socket: Socket;
