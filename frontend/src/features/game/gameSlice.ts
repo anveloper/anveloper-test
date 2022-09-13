@@ -3,7 +3,7 @@ import { RootState } from "../../app/store";
 import { io, Socket } from "socket.io-client";
 import Axios from "axios";
 
-const baseURL = "http://localhost:5000";
+// const baseURL = "http://localhost:5000";
 export interface GameState {
   roomList: [];
   socket: Socket;
@@ -17,7 +17,7 @@ export interface GameState {
 
 const initialState: GameState = {
   roomList: [],
-  socket: io(baseURL),
+  socket: io(),
   userName: "",
   roomName: "",
   roomCount: 0,
