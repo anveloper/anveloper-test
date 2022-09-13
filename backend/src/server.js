@@ -3,7 +3,7 @@ import SocketIO from "socket.io";
 import express from "express";
 import cors from "cors";
 
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 const app = express();
 
 app.use();
