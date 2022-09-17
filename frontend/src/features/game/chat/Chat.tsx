@@ -4,18 +4,19 @@ import {
   selectSocket,
   selectAnswer,
   selectRoomName,
+  selectMessages,
   setAnswer,
+  setMessages,
 } from "../gameSlice";
 import styles from "./Chat.module.css";
-import { ChatItemCard } from "./ChatItem";
 import ChatList from "./ChatList";
 
 const Chat = () => {
   const socket = useAppSelector(selectSocket);
   const roomName = useAppSelector(selectRoomName);
   const answer = useAppSelector(selectAnswer);
+  const messages = useAppSelector(selectMessages);
   const [isSubmit, setIsSubmit] = useState(false);
-  const [messages, setMessages] = useState<ChatItemCard[]>([]);
   const lastRef = useRef<HTMLDivElement>(null);
   const [newMessage, setNewMessage] = useState("");
 
@@ -27,10 +28,7 @@ const Chat = () => {
       console.log(answer);
     });
     socket.on("new_message", (nickname, msg) => {
-      setMessages([
-        ...messages,
-        { type: "other", name: nickname, content: msg },
-      ]);
+      dispatch(setMessages({ type: "other", name: nickname, content: msg }));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
@@ -54,10 +52,7 @@ const Chat = () => {
   const handleSend = () => {
     if (socket) {
       socket.emit("new_message", roomName, newMessage, (msg: string) => {
-        setMessages([
-          ...messages,
-          { type: "mine", name: "mine", content: msg },
-        ]);
+        dispatch(setMessages({ type: "mine", name: "mine", content: msg }));
       });
     }
   };

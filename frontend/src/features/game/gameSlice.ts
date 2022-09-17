@@ -4,6 +4,11 @@ import { io, Socket } from "socket.io-client";
 import Axios from "axios";
 
 // const baseURL = "http://localhost:5000";
+export interface MsgConfig {
+  type: "mine" | "other";
+  name: string;
+  content: string;
+}
 export interface GameState {
   roomList: [];
   socket: Socket;
@@ -12,6 +17,7 @@ export interface GameState {
   roomCount: number;
   answer: string;
   color: string;
+  messages: MsgConfig[];
   status: "idle" | "loading" | "failed";
 }
 
@@ -23,6 +29,7 @@ const initialState: GameState = {
   roomCount: 0,
   answer: "",
   color: "black",
+  messages: [],
   status: "idle",
 };
 
@@ -54,6 +61,9 @@ export const gameSlice = createSlice({
     setColor: (state, { payload }) => {
       state.color = payload;
     },
+    setMessages: (state, { payload: { type, name, content } }) => {
+      state.messages.push({ type, name, content });
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -70,8 +80,14 @@ export const gameSlice = createSlice({
   },
 });
 
-export const { setRoomList, setRoomName, setUserName, setAnswer, setColor } =
-  gameSlice.actions;
+export const {
+  setRoomList,
+  setRoomName,
+  setUserName,
+  setAnswer,
+  setColor,
+  setMessages,
+} = gameSlice.actions;
 export const selectSocket = (state: RootState) => state.game.socket;
 export const selectRoomList = (state: RootState) => state.game.roomList;
 export const selectName = (state: RootState) => {
@@ -80,5 +96,5 @@ export const selectName = (state: RootState) => {
 export const selectRoomName = (state: RootState) => state.game.roomName;
 export const selectAnswer = (state: RootState) => state.game.answer;
 export const selectColor = (state: RootState) => state.game.color;
-
+export const selectMessages = (state: RootState) => state.game.messages;
 export default gameSlice.reducer;
